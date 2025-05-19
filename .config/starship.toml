@@ -1,46 +1,187 @@
-format = '''
-$directory$git_branch$rust$python
-$character'''
+# ~/.config/starship.toml
 
-palette = 'colors'
+# Inserts a blank line between shell prompts
+add_newline = false
 
-[palettes.colors]
-mustard = '#af8700' # example
-color1 = '#81d5cc'
-color2 = '#003733'
-color3 = '#bec9c6'
-color4 = '#1a2120'
-color5 = '#003733'
-color6 = '#0e1514'
-color7 = '#0e1514'
-color8 = '#81d5cc'
-color9 = '#afc9e7'
+# Change the default prompt format
+# format = """\
+# [╭╴](238)$os$character\
+#  $all[╰→](238)"""
 
-# Prompt symbols 
+format = """\
+$os$all"""
+
+
+# Sets user-defined palette
+palette = "catppuccin_macchiato"
+
 [character]
-success_symbol = "[🞈](color9 bold)"
-error_symbol = "[🞈](@{error})"
-vicmd_symbol = "[🞈](#f9e2af)"
+error_symbol ='[](fg:red)'
+success_symbol ='[](fg:sky)'
+
+[os]
+disabled = false
+format = '[$symbol](bold white)'
+
+[os.symbols]
+Arch = "[󰣇 ](fg:#89b4fa)"
+Ubuntu = ""
+Windows = ""
+
+[shlvl]
+disabled = true
+symbol = " "
+threshold = 1
+
+# Shows the username
+[username]
+disabled = false # disable in powershell
+format = "[$user ]($style)" 
+style_user = "bold blue"
+style_root = "bold yellow"
+show_always = true 
 
 [directory]
-format = "[](fg:color1 bg:color4)[󰉋](bg:color1 fg:color2)[ ](fg:color1 bg:color4)[$path ](fg:color3 bg:color4)[ ](fg:color4)"
+format ="[$path]($style)[ $read_only]($read_only_style)[⚡](fg:#ffd584)"
+style = "bold mauve"
+home_symbol = " "
+read_only = "󰉑 "
+read_only_style = "fg:red"
+truncation_length = 3
+truncation_symbol =" "
 
-[directory.substitutions]
-"Documents" = "󰈙 "
-"Downloads" = " "
-"Music" = " "
-"Pictures" = " "
-
-[git_branch]
-format = "[](fg:color8 bg:color4)[ ](bg:color8 fg:color5)[](fg:color8 bg:color4)[(bg:color8 fg:color5) $branch](fg:color3 bg:color4)[](fg:color4) "
+[cmd_duration]
+format = '[](base)[󱦟 $duration]($style)[ ](base)'
+style = "bold fg:mauve bg:base"
+min_time = 500
 
 [time]
-format = "[](fg:color8 bg:color4)[ ](bg:color8 fg:color5)[](fg:color8 bg:color4)[(bg:color8 fg:color5) $time](fg:color3 bg:color4)[](fg:color4) "
-disabled = false
-time_format = "%R" # Hour:Minute Format
+disabled = true 
+format = '[ $time ]($style)' 
+time_format = "%R" 
+
+[fill]
+style = 'bold green'
+symbol = '-'
+
+[git_branch]
+format = "on [$symbol$branch]($style) "
+style = "bold green"
+symbol = " "
+truncation_length = 20
+truncation_symbol = "... "
+
+[git_status]
+ahead = "⇡${count}"
+behind = "⇣${count}"
+conflicted = "󰕚 "
+deleted = " "
+diverged = "⇕⇡${ahead_count}⇣${behind_count}"
+format = '[](green)[ $all_status$ahead_behind]($style)[ ](green)'
+modified = " "
+renamed = " "
+staged = '[++\($count\)](green)'
+stashed = "󰏗 "
+style = "bold bg:green fg:mantle"
+untracked = " "
+up_to_date = "󱓏 "
+
+[package]
+symbol = " "
+style = "bold peach"
+
+[java]
+format = "via [](rosewater)[[ ]($style)[ ](rosewater)$version](bold rosewater) "
+style = "bold bg:rosewater fg:crust"
+
+[lua]
+format = " via [](sky)[[]($style)[ ](sky)$version](bold sky) "
+style = "bold bg:sky fg:crust"
+
+[terraform]
+format = " via [ terraform $version]($style) 壟 [$workspace]($style) "
+
+[vagrant]
+format = " via [ vagrant $version]($style) "
+
+[docker_context]
+format = " via [](blue)[ $context]($style)[](blue)"
+style = "bold bg:blue fg:crust"
+
+[helm]
+format = " via [ $version](bold purple) "
 
 [python]
-format = "[](fg:color8 bg:color4)[${symbol}${version}](bg:color8 fg:color5)[](fg:color8 bg:color4)[(bg:color8 fg:color5)( ${virtualenv})](fg:color3 bg:color4)[](fg:color4) "
-symbol = '🐍'
-# pyenv_version_name = true
-pyenv_prefix = 'venv'
+python_binary = "python3"
+symbol = "󰌠 "
+
+[nodejs]
+format = " via [](green)[ 󰎙 ]($style)[](green) $version"
+style = "bold bg:green fg:crust"
+
+[ruby]
+format = " via [ $version]($style) "
+
+[kubernetes]
+disabled = true
+format = 'on [ $context\($namespace\)](bold purple) '
+[kubernetes.context_aliases]
+"clcreative-k8s-production" = "cl-k8s-prod"
+"clcreative-k8s-staging" = "cl-k8s-staging"
+
+[palettes.catppuccin_mocha]
+rosewater = "#f5e0dc"
+flamingo = "#f2cdcd"
+pink = "#f5c2e7"
+mauve = "#cba6f7"
+red = "#f38ba8"
+maroon = "#eba0ac"
+peach = "#fab387"
+yellow = "#f9e2af"
+green = "#a6e3a1"
+teal = "#94e2d5"
+sky = "#89dceb"
+sapphire = "#74c7ec"
+blue = "#89b4fa"
+lavender = "#b4befe"
+text = "#cdd6f4"
+subtext1 = "#bac2de"
+subtext0 = "#a6adc8"
+overlay2 = "#9399b2"
+overlay1 = "#7f849c"
+overlay0 = "#6c7086"
+surface2 = "#585b70"
+surface1 = "#45475a"
+surface0 = "#313244"
+base = "#1e1e2e"
+mantle = "#181825"
+crust = "#11111b"
+
+# palette tables should be last in the config ⚓️
+[palettes.catppuccin_macchiato]
+rosewater = "#f4dbd6"
+flamingo = "#f0c6c6"
+pink = "#f5bde6"
+mauve = "#c6a0f6"
+red = "#ed8796"
+maroon = "#ee99a0"
+peach = "#f5a97f"
+yellow = "#eed49f"
+green = "#a6da95"
+teal = "#8bd5ca"
+sky = "#91d7e3"
+sapphire = "#7dc4e4"
+blue = "#8aadf4"
+lavender = "#b7bdf8"
+text = "#cad3f5"
+subtext1 = "#b8c0e0"
+subtext0 = "#a5adcb"
+overlay2 = "#939ab7"
+overlay1 = "#8087a2"
+overlay0 = "#6e738d"
+surface2 = "#5b6078"
+surface1 = "#494d64"
+surface0 = "#363a4f"
+base = "#24273a"
+mantle = "#1e2030"
+crust = "#181926"
