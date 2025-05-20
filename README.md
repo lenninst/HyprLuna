@@ -10,7 +10,7 @@ MiHyprLuna es un fork personalizado de [HyprLuna](https://hyprluna.org), una con
 |-----------|-------------------|
 | Atajos de teclado | Agregado un par de atajos de hyDE |
 | Aplicaciones predeterminadas | Selección personalizada de aplicaciones alineadas con mi flujo de trabajo |
-| Cheats | Agregado cheats de tmux |
+| Cheat sheet | Agregado cheats de tmux |
 
 ## 🙏 Agradecimientos
 
