@@ -1,4 +1,5 @@
 # MyHyprLuna
+![Captura de pantalla](myPreviews/captura1.png)
 
 ##  Introducción
 
