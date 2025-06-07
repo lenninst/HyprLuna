@@ -5,10 +5,11 @@ const { Box } = Widget;
 import { monitors } from '../.commondata/hyprlanddata.js';
 
 export default (monitor = 0) => {
-    return Box({
-        className: 'desktop-background',
-        setup: (self) => {
-            self.set_size_request(monitors[monitor].width, monitors[monitor].height);
-        },
-    });
+    // return Box({
+    //     className: 'desktop-background',
+    //     setup: (self) => {
+    //         self.set_size_request(monitors[monitor].width, monitors[monitor].height);
+    //     },
+    // });
+  return null;
 }

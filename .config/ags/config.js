@@ -29,18 +29,17 @@ const opts = await userOptions.asyncGet();
 const range = (length, start = 1) =>
   Array.from({ length }, (_, i) => i + start);
 
-// function forMonitors(widget) {
-//   const n = Gdk.Display.get_default()?.get_n_monitors() || 1;
-//   return range(n, 0).map(widget).flat(1);
-// }
+function forMonitors(widget) {
+  const n = Gdk.Display.get_default()?.get_n_monitors() || 1;
+  return range(n, 0).map(widget).flat(1);
+}
 
 globalThis["handleStyles"] = () => {
   // Reset Styles
   Utils.exec(`mkdir -p "${GLib.get_user_state_dir()}/ags/scss"`);
   let lightdark = darkMode.value ? "dark" : "light";
   Utils.writeFileSync(
-    `@mixin symbolic-icon { -gtk-icon-theme: '${
-      userOptions.asyncGet().icons.symbolicIconTheme[lightdark]
+    `@mixin symbolic-icon { -gtk-icon-theme: '${userOptions.asyncGet().icons.symbolicIconTheme[lightdark]
     }'}`,
     `${GLib.get_user_state_dir()}/ags/scss/_lib_mixins_overrides.scss`
   );
@@ -48,10 +47,8 @@ globalThis["handleStyles"] = () => {
   async function applyStyle() {
     Utils.exec(`mkdir -p ${COMPILED_STYLE_DIR}`);
     Utils.exec(
-      `sass -I "${GLib.get_user_state_dir()}/ags/scss" -I "${
-        App.configDir
-      }/scss/fallback" "${
-        App.configDir
+      `sass -I "${GLib.get_user_state_dir()}/ags/scss" -I "${App.configDir
+      }/scss/fallback" "${App.configDir
       }/scss/main.scss" "${COMPILED_STYLE_DIR}/style.css"`
     );
     App.resetCss();
@@ -110,19 +107,19 @@ let Modules = () => [
   ...(userOptions.asyncGet().dock.enabled ? [forMonitors(Dock)] : []),
   ...(userOptions.asyncGet().appearance.fakeScreenRounding !== 0
     ? [
-        forMonitors((id) =>
-          Corner(id, "top left", true, opts.etc.screencorners.topleft)
-        ),
-        forMonitors((id) =>
-          Corner(id, "top right", true, opts.etc.screencorners.topright)
-        ),
-        forMonitors((id) =>
-          Corner(id, "bottom left", true, opts.etc.screencorners.bottomleft)
-        ),
-        forMonitors((id) =>
-          Corner(id, "bottom right", true, opts.etc.screencorners.bottomright)
-        ),
-      ]
+      forMonitors((id) =>
+        Corner(id, "top left", true, opts.etc.screencorners.topleft)
+      ),
+      forMonitors((id) =>
+        Corner(id, "top right", true, opts.etc.screencorners.topright)
+      ),
+      forMonitors((id) =>
+        Corner(id, "bottom left", true, opts.etc.screencorners.bottomleft)
+      ),
+      forMonitors((id) =>
+        Corner(id, "bottom right", true, opts.etc.screencorners.bottomright)
+      ),
+    ]
     : []),
   SideLeft(),
   Recorder(),
